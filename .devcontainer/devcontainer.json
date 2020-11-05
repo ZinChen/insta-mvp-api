@@ -1,0 +1,41 @@
+{
+	"name": "Rails Api",
+	"dockerFile": "Dockerfile",
+	"settings": {
+		"terminal.integrated.shell.linux": null,
+		"[ruby]": {
+			"editor.insertSpaces": true,
+			"editor.tabSize": 2
+		},
+		"solargraph.commandPath": "/usr/local/bundle/bin/solargraph",
+		"solargraph.bundlerPath": "/usr/local/bin/bundle",
+		"solargraph.diagnostics": false,
+		"solargraph.checkGemVersion": false,
+		"ruby.rubocop.executePath": "/usr/local/bundle/bin/",
+	},
+	"extensions": [
+		"eamodio.gitlens",
+		"rebornix.Ruby",
+		"castwide.solargraph",
+		"kaiwood.endwise",
+		"groksrc.ruby",
+		"miguel-savignano.ruby-symbols",
+		"wingrunr21.vscode-ruby",
+		"noku.rails-run-spec-vscode"
+	]
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line to run commands after the container is created - for example installing curl.
+	// "postCreateCommand": "apt-get update && apt-get install -y curl",
+
+	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
+	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+
+	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
+
+	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
+}
