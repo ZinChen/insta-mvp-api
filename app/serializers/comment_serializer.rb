@@ -1,8 +1,12 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :content, :created_at, :user_name
+  attributes :id, :content, :created_at, :user_name, :user_photo
 
   def user_name
     object.user.name
+  end
+
+  def user_photo
+    object.user.photo
   end
 
   # belongs_to :user

@@ -9,15 +9,21 @@
 10.times do
   name = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
   email = "#{name.underscore.delete(' ')}@gmail.com"
+  photo = Faker::LoremFlickr.image(
+    size: '240x240',
+    search_terms: ['people', 'face']
+  ) + "?lock=#{rand(1..300)}"
+
   user = User.create(
     name: name,
-    email: email
+    email: email,
+    photo: photo,
   )
 
   rand(1..3).times do
     user.posts.create(
-      image_url: "https://picsum.photos/id/#{rand(300)}/300",
-      description: Faker::Lorem.sentence,
+      image_url: "https://picsum.photos/id/#{rand(300)}/800",
+      description: Faker::Lorem.sentence(word_count: rand(10..15)),
     )
   end
 end
@@ -28,7 +34,7 @@ Post.all.each do |post|
     user = User.find(rand(1..users_count))
     post.comments.create(
       user: user,
-      content: Faker::Lorem.sentence,
+      content: Faker::Lorem.sentence(word_count: rand(5..15)),
     )
   end
 end
