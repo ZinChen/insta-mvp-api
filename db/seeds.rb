@@ -22,19 +22,20 @@
 
   rand(1..3).times do
     user.posts.create(
-      image_url: "https://picsum.photos/id/#{rand(300)}/800",
+      image_url: "https://picsum.photos/id/#{rand(1..100)}/1000",
       description: Faker::Lorem.sentence(word_count: rand(10..15)),
     )
   end
 end
 
 Post.all.each do |post|
-  rand(3..5).times do
+  rand(1..7).times do
     users_count = User.count
     user = User.find(rand(1..users_count))
     post.comments.create(
       user: user,
       content: Faker::Lorem.sentence(word_count: rand(5..15)),
     )
+    post.likes.create(user: user)
   end
 end
