@@ -12,12 +12,12 @@ class Api::V1::IndexController < ApplicationController
   def post_like
     raise StandardError if current_user.nil?
 
-    like = current_user.likes.by_post(params[:post_id]).take
+    like = current_user.likes.by_post(safe_params[:post_id]).take
     if like.present?
       like.destroy
     else
       current_user.likes.create(
-        post_id: params[:post_id]
+        post_id: safe_params[:post_id]
       )
     end
 
@@ -31,9 +31,12 @@ class Api::V1::IndexController < ApplicationController
   def create_post
     raise StandardError if current_user.nil?
 
-    # current_user.posts.create
+    post = current_user.posts.create(
+      image_url: safe_params[:image],
+      description: safe_params[:comment]
+    )
 
-    render json: current_user
+    render json: post
   rescue AuthorizationError
     render json: {}, status: :unauthorized
   rescue
@@ -43,9 +46,13 @@ class Api::V1::IndexController < ApplicationController
   def create_comment
     raise StandardError if current_user.nil?
 
-    # current_user.posts.create
+    post = Post.find(safe_params[:post_id])
+    comment = post.comments.create(
+      user: current_user,
+      content: safe_params[:comment]
+    )
 
-    render json: current_user
+    render json: comment
   rescue AuthorizationError
     render json: {}, status: :unauthorized
   rescue
@@ -55,6 +62,6 @@ class Api::V1::IndexController < ApplicationController
   private
 
   def safe_params
-    params.permit(:post_id)
+    params.permit(:post_id, :comment, :image)
   end
 end
