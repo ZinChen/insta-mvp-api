@@ -1,5 +1,6 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :image_url, :description, :created_at, :user_name, :user_photo, :likes_count, :comments_count
+  attributes :id, :image_url, :description, :created_at,
+             :user_name, :user_photo, :user_id, :likes_count, :comments_count
 
   has_many :comments
   has_many :likes
@@ -10,6 +11,10 @@ class PostSerializer < ActiveModel::Serializer
 
   def user_photo
     object.user.photo
+  end
+
+  def user_id
+    object.user.id
   end
 
   def likes_count

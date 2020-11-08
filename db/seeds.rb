@@ -19,7 +19,7 @@
 
   rand(1..3).times do
     user.posts.create(
-      image_url: "https://picsum.photos/id/#{rand(1..100)}/1000",
+      image_url: "https://picsum.photos/id/#{rand(1..100)}/1000/750",
       description: Faker::Lorem.sentence(word_count: rand(10..15)),
     )
   end

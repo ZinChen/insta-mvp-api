@@ -1,6 +1,10 @@
 class Api::V1::IndexController < ApplicationController
   def posts
-    posts = Post.all
+    if safe_params[:user_id].present?
+      posts = Post.where(user_id: safe_params[:user_id]).all
+    else
+      posts = Post.all
+    end
     render json: posts
   end
 
@@ -62,6 +66,6 @@ class Api::V1::IndexController < ApplicationController
   private
 
   def safe_params
-    params.permit(:post_id, :comment, :image)
+    params.permit(:user_id, :post_id, :comment, :image)
   end
 end
