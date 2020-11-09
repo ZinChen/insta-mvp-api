@@ -1,24 +1,9 @@
-# README
+# Project structure
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```app/controller/api/v1/index_conroller.rb``` - All API endpoints except authorization
 
-Things you may want to cover:
+```app/controller/api/v1/session_conroller.rb``` - Authorization endpoints
 
-* Ruby version
+```app/serializers``` - Serializers for Active Records
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```lib/lorem_picsum.rake``` - Rake task to get array of accessible images ids within given range
