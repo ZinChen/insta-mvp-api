@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/login', to: 'session#login'
       post '/signup', to: 'session#signup'
+      get '/user', to: 'session#user'
       get '/posts', to: 'index#posts'
       get '/comments', to: 'index#comments'
       post '/post_like', to: 'index#post_like'

@@ -1,6 +1,10 @@
 class Api::V1::SessionController < ApplicationController
+  def user
+    render json: current_user
+  end
+
   def login
-    user = User.find_by(email: user_params[:email])
+    user = User.find_by(email: user_params[:email], encrypted_password: Base64.encode64(user_params[:password]))
     raise AuthorizationError if user.nil?
 
     user.update(authentication_token: User.generate_unique_secure_token)
@@ -8,7 +12,7 @@ class Api::V1::SessionController < ApplicationController
     render json: user, status: :ok
   rescue AuthorizationError
     error = {
-      email: "Email is not registered"
+      email: "Email or password is incorrect"
     }
     render json: { errors: error }, status: :unauthorized
   end
@@ -29,7 +33,7 @@ class Api::V1::SessionController < ApplicationController
     error = {
       email: "Email is already taken"
     }
-    render json: { error: error }, status: :unauthorized
+    render json: { errors: error }, status: :unauthorized
   rescue
     render json: user,
       adapter: :json_api,

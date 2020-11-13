@@ -3,6 +3,8 @@ class ApplicationController < ActionController::API
 
   def current_user
     provided_token = request.authorization&.gsub(/\ABearer\s/, '')
-    @current_user = User.find_by(authentication_token: provided_token)
+    if provided_token.present?
+      @current_user = User.find_by(authentication_token: provided_token)
+    end
   end
 end
